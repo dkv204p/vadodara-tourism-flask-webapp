@@ -26,5 +26,5 @@ def aboutUs():
 def exploreTours():
     return render_template('explore-tours.html')
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0')
