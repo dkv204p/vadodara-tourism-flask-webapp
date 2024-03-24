@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vadodara Tourism WebApp By Byte Brigade</title>
+    <link href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+        <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+  </head>
+  <body>
+    {% include 'modal.html' %}
+    {% include 'navbar.html' %}
+    <br>
+    <div class="container">
+        <center>
+            <p class="h1">Explore Awesome Tour Packages</p>
+        </center>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="{{ url_for('static', filename='/images/package-1.jpeg') }}" class="img-fluid rounded-start" alt="Package 1">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"><b>Basic Package</b></h5>
+                      <p class="card-text">Discover the essence of adventure and relaxation with our Basic 2-Day Tour Package. Immerse yourself in captivating landscapes, cozy accommodations, and cultural experiences. Perfect for a quick getaway, our package offers a taste of exploration and tranquility. Join us for an unforgettable journey packed with memories to cherish.</p>
+                      <p class="card-text"><small class="text-body-secondary"><b>Price: 2499&#8377;</b></small></p>
+                      <a href="/basic-package" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicPackage">Explore Basic Package</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <div class="row">
+            <div class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="{{ url_for('static', filename='/images/package-1.jpeg') }}" class="img-fluid rounded-start" alt="Package 2">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title"><b>Premium Package</b></h5>
+                      <p class="card-text">Experience luxury and adventure with our Premium 5-Day Tour Package. Enjoy lavish accommodations, gourmet dining, and exclusive access to top attractions. Let us elevate your journey with personalized services and unforgettable experiences. Embark on an extraordinary adventure with us.</p>
+                      <p class="card-text"><small class="text-body-secondary"><b>Price: 4499&#8377;</b></small></p>
+                      <a href="/premium-package" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#premiumPackage">Explore Premium Package</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='/js/bootstrap.bundle.min.js') }}"></script>
+  </body>
+</html>

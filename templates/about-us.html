@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vadodara Tourism WebApp By Byte Brigade</title>
+    <link href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+        <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+  </head>
+  <body>
+
+    {% include 'navbar.html' %}
+
+    <div class="container"><br>
+        <center>
+            <p class="h1">About The Team</p>
+        </center>
+        <br>
+        <div class="row">
+
+            <div class="col">
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="circle">
+                                <img class="img-fluid" src="{{ url_for('static', filename='/team/aryan.jpg') }}" alt="Aryan">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <p class="h4">Aryan Soni</p>
+                            <p class="h6">Team Lead</p>
+                            <code style="color: orangered;">"Coding Craze, Esports Haze, Snooze & Amaze, Learning Maze!"</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="circle">
+                                <img class="img-fluid" src="{{ url_for('static', filename='/team/dev.jpeg') }}" alt="Dev">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <p class="h4">Dev Verma</p>
+                            <p class="h6">Core Member</p>
+                            <code style="color: orangered;">"Debugging by Day, DJ by Night: A Pen Tester's Playlist for Hacking into Groovy Beats!"</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+
+            <div class="col">
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="circle">
+                                <img class="img-fluid" src="{{ url_for('static', filename='/team/deep.jpg') }}" alt="Aryan">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <p class="h4">Divyang Rajput</p>
+                            <p class="h6">Core Member</p>
+                            <code style="color:orangered">"Sports, code, and a sprinkle of salsa! Flexing bytes and muscles, all while dreaming of camo couture."</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="circle">
+                                <img class="img-fluid" src="{{ url_for('static', filename='/team/anany.jpg') }}" alt="Aryan">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <p class="h4">Anany Agrawal</p>
+                            <p class="h6">Core Member</p>
+                            <code style="color: orangered;">"Sleeping through the Menu: Dreaming of Delicious Delights!"</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='/js/bootstrap.bundle.min.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vadodara Tourism WebApp By Byte Brigade</title>
+    <link href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+  </head>
+
+  <style>
+    #mapContainer {
+        width: 100%;
+        height: 90vh;
+    }
+    .info-bubble {
+        max-width: 300px;
+    }
+    .info-bubble img {
+        max-width: 300px;
+    }
+    #placeInfo {
+        position: fixed;
+        top: 10%;
+        left: 10px;
+        padding: 10px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        z-index: 1000;
+    }
+  </style>
+
+  <body>
+
+    {% include 'navbar.html' %}
+    <div id="mapContainer"></div>
+    <div id="placeInfo"></div>
+    {% include 'footer.html' %}
+
+    <script>
+        var latitude = 22.29;
+        var longitude = 73.21;
+    
+        var platform = new H.service.Platform({
+            'apikey': 'PfYWjyvQshH_R9L8mrcjhjhhEPcNjNKAardVwF96GyY'
+        });
+    
+        var defaultLayers = platform.createDefaultLayers();
+        var map = new H.Map(
+            document.getElementById('mapContainer'),
+            defaultLayers.vector.normal.map,
+            {
+                zoom: 13
+            }
+        );
+
+        map.setCenter({ lat: latitude, lng: longitude });
+    
+        var ui = H.ui.UI.createDefault(map, defaultLayers);
+        
+        var mapEvents = new H.mapevents.MapEvents(map);
+        var behavior = new H.mapevents.Behavior(mapEvents);
+
+        // Function to add a marker to the map
+        function addMarkerToMap(lat, lng, title, description, imageUrl) {
+            var icon = new H.map.Icon("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='red' width='24' height='24'%3E%3Cpath d='M12 2C7.58 2 4 5.58 4 10c0 4.24 6.75 11.46 7.4 12.21a1 1 0 0 0 1.2 0C13.25 21.46 20 14.24 20 10c0-4.42-3.58-8-8-8zm0 11.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z'/%3E%3C/svg%3E");
+            var marker = new H.map.Marker({ lat: lat, lng: lng }, { icon: icon });
+            map.addObject(marker);
+            if (title && description) {
+                marker.setData({ title: title, description: description, imageUrl: imageUrl });
+            }
+            marker.addEventListener('pointerenter', function (evt) {
+                var bubbleContent = '<div class="info-bubble">';
+                if (imageUrl) {
+                    bubbleContent += '<img src="' + imageUrl + '" alt="' + title + '">';
+                }
+                bubbleContent += '<h5>' + title + '</h5>';
+                bubbleContent += '<p>' + description + '</p>';
+                bubbleContent += '</div>';
+                var bubble = new H.ui.InfoBubble(evt.target.getGeometry(), {
+                    content: bubbleContent
+                });
+                ui.addBubble(bubble);
+            }, false);
+            marker.addEventListener('pointerleave', function (evt) {
+                ui.getBubbles().forEach(function(bubble) {
+                    ui.removeBubble(bubble);
+                });
+            });
+            marker.addEventListener('tap', function (evt) {
+                displayPlaceInfo(description);
+            });
+        }
+
+        // Add markers for some places
+        addMarkerToMap(22.3115, 73.1914, "Sayaji Baug Zoo", "<b>Sayaji Baug Zoo: A Wildlife Oasisin Vadodara</b><br>Discover the natural wonders of Sayaji Baug Zoo, nestled in the heart of Vadodara, Gujarat. Home to a diverse array of animals, including lions, monkeys, birds, and deer, this zoo offers a captivating experience for visitors of all ages. Explore lush gardens, educational exhibits, and family-friendly amenities for a day of fun and learning. Plan your visit today and immerse yourself in the beauty of nature at Sayaji Baug Zoo.", "{{ url_for('static', filename='/images/zoo.jpg') }}");
+        addMarkerToMap(22.2936, 73.1919, "Laxmi Vilas Palace", "<b>Laxmi Vilas Palace: Where Royalty Resides</b><br>Experience the grandeur of Laxmi Vilas Palace, a magnificent architectural marvel located in Vadodara, Gujarat. Built in the 19th century by the Gaekwad dynasty, this opulent palace boasts stunning Indo-Saracenic architecture and houses a treasure trove of historical artifacts. Explore the palace's ornate interiors, stroll through its picturesque gardens, and immerse yourself in the regal charm of this iconic landmark.", "{{ url_for('static', filename='/images/laxmi.jpg') }}");
+        addMarkerToMap(22.3008, 73.2039, "SurSagar Lake", "<b>Sursagar Lake: Urban Oasis </b><br>Escape the city buzz at Sursagar Lake, Vadodara's tranquil retreat. Serene waters, lush surroundings, and occasional cultural festivities make it a perfect spot for a peaceful stroll or a leisurely boat ride. Whether you seek solitude or a family outing, Sursagar Lake offers a refreshing respite in the heart of the city.", "{{ url_for('static', filename='/images/sagar.jpg') }}");
+        addMarkerToMap(22.3314, 73.192, "EME Temple", "<b>EME Temple: Harmony of Tradition and Innovation</b><br>The EME Temple in Vadodara harmonizes ancient spiritual devotion with modern architectural brilliance. Dedicated to Lord Dakshinamurthy, its striking design and serene ambiance attract visitors of all beliefs. Experience a blend of tradition and innovation at this cultural gem, offering solace and inspiration to all who visit.", "{{ url_for('static', filename='/images/eme.jpg') }}");
+        addMarkerToMap(22.3075, 73.1911, "Kirti Mandir", "<b>Kirti Mandir: A Tribute to Freedom Fighters</b><br>Kirti Mandir in Vadodara, Gujarat, is a solemn memorial honoring India's freedom fighters. Its intricate architecture and serene surroundings provide a tranquil space for reflection and remembrance. Visit to pay homage to the heroes who fought for India's independence.", "{{ url_for('static', filename='/images/kirti.jpg') }}");
+
+        addMarkerToMap(22.306895082777686, 73.19287808249882, "Baroda Hospital", "", "{{ url_for('static', filename='/images/baroda-hospital.jpg') }}");
+        addMarkerToMap(22.30157468124792, 73.22085888522685, "Shreeji Hospital", "", "{{ url_for('static', filename='/images/shreeji.jpg') }}");
+        addMarkerToMap(22.288531690486263, 73.36546304241072, "Parul Sevashram Hospital", "", "{{ url_for('static', filename='/images/parul.jpg') }}");
+        addMarkerToMap(22.36062783501959, 73.16782047304582, "Satyam Hospital", "", "{{ url_for('static', filename='/images/Satyam.jpg') }}");
+
+        addMarkerToMap(22.287966432581694, 73.24413526384284, "Maryland Hotel", "", "{{ url_for('static', filename='/images/maryland.jpg') }}");
+        addMarkerToMap(22.265825130266457, 73.17948102022872, "Metro Hotel", "", "{{ url_for('static', filename='/images/metro.jpg') }}");
+        addMarkerToMap(22.308075931278417, 73.19012402494735, "Sayaji Hotel", "", "{{ url_for('static', filename='/images/sayaji.jpg') }}");
+
+        addMarkerToMap(22.304527068122, 73.2532073200218, "Taksh Galaxy Mall", "", "{{ url_for('static', filename='/images/taksh.jpg') }}");
+        addMarkerToMap(22.328296759822685, 73.16549278073542, "Inorbit Mall", "", "{{ url_for('static', filename='/images/inorbit.jpg') }}");
+        addMarkerToMap(22.325564817257433, 73.18941492781353, "7 Seas Mall", "", "{{ url_for('static', filename='/images/7seas.jpg') }}");
+
+        function displayPlaceInfo(description) {
+            var placeInfoDiv = document.getElementById('placeInfo');
+            placeInfoDiv.innerHTML = '<p>' + description + '</p>';
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='/js/bootstrap.bundle.min.js') }}"></script>
+  </body>
+</html>

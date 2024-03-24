@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vadodara Tourism WebApp By Byte Brigade</title>
+    <link href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+
+    <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+  </head>
+  <body>
+
+    {% include 'navbar.html' %}
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="3000">
+            <img src="{{ url_for('static', filename='/images/Laxmi-Vilas-Palace-Thumbnail.jpg') }}" class="d-block w-100" alt="Laxmi Vilas Palace">
+            <div class="carousel-caption d-none d-md-block">
+              <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">Laxmi Vilas Palace</h2>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="3000">
+            <img src="{{ url_for('static', filename='/images/Sayaji-Baug-Thumbnail.jpg') }}" class="d-block w-100" alt="Sayaji Baug">
+            <div class="carousel-caption d-none d-md-block">
+              <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">Sayaji Baug</h2>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="3000">
+            <img src="{{ url_for('static', filename='/images/Sursagar-Lake-Thumbnail.jpg') }}" class="d-block w-100" alt="Sursagar Lake">
+            <div class="carousel-caption d-none d-md-block">
+              <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">Sursagar Lake</h2>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="3000">
+            <img src="{{ url_for('static', filename='/images/Kirti-Mandir-Thumbnail.jpg') }}" class="d-block w-100" alt="Kirti Mandir">
+            <div class="carousel-caption d-none d-md-block">
+              <h2 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">Kirti Mandir</h2>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <br><br>
+
+    <div class="container">
+        <center>
+            <p class="h1">Explore Vadodara Like Never Before!</p><br>
+        </center>
+        
+        <div class="row p-4" style="border-radius: 1em; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);">
+          <center><p class="h2">Natures Touch</p><p class="h5">"Places To Connect With Nature"</p></center><br>
+            <div class="col">
+                <div class="card text-center">
+                    <div class="card-header">
+                      Featured
+                    </div>
+                    <div class="card-body">
+                        <img src="{{ url_for('static', filename='/images/kotna-beach.png') }}" class="img-thumbnail img-features" alt="Kotna Beach">
+                        <h5 class="card-title">Kotna Beach</h5>
+                        <p class="card-text">Lovely outing place in the nature! You can go for kayaking, or boating or simply sit there peaceful and enjoy the view! Plus - its pet friendly!.</p><br>
+                        <a href="#" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-center">
+                    <div class="card-header">
+                      Featured
+                    </div>
+                    <div class="card-body">
+                        <img src="{{ url_for('static', filename='/images/baroda-kayaks.jpeg') }}" class="img-thumbnail img-features" alt="Baroda Kayaks">
+                        <h5 class="card-title">Baroda Kayaks</h5>
+                        <p class="card-text">Visit here for exciting water sport, do kayaking and enjoy the nature's view.</p><br><br>
+                        <a href="#" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-center">
+                    <div class="card-header">
+                      Featured
+                    </div>
+                    <div class="card-body">
+                        <img src="{{ url_for('static', filename='/images/vadhvana-bird-sanctuary.png') }}" class="img-thumbnail img-features" alt="Vadhvana Bird Sanctuary">
+                        <h5 class="card-title">Vadhvana Bird Sanctuary</h5>
+                        <p class="card-text">The place is a good tourist destination for birds lovers from all over the world who come here and enjoy the birds, watching and studying their behavior.</p>
+                        <a href="#" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="container container-1 bg-img">
+        <div class="row p-4">
+            <div class="col p-4" style="background-color: rgb(197, 245, 255); border-radius: 1em; opacity: 70%;">
+                <p class="h3"><b>Featured Places</b></p>
+                <p class="h5"><b>Vadodara's charm through its featured places, where heritage and nature converge to create unforgettable experiences. Laxmi Vilas Palace, a symbol of regal opulence, invites you to explore its majestic halls and lush gardens, steeped in the rich history of the Gaekwad dynasty. Nearby, Sursagar Lake offers a tranquil retreat amidst the city's hustle, with serene waters and verdant surroundings perfect for leisurely walks and contemplative moments. Whether delving into royal legacies or embracing the serenity of nature, Vadodara's featured places promise an enchanting journey through time and beauty.</b></p>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="card" style="width: 18rem; background-color: rgb(197, 245, 255); border-radius: 1em; opacity: 70%;">
+                            <img src="{{ url_for('static', filename='/images/Laxmi-Vilas-Palace-Thumbnail.jpg') }}" class="card-img-top" style="height: 25vh; object-fit: fill;" alt="Laxmi Vilas Palace">
+                            <div class="card-body">
+                              <p class="card-text"><b>Still the residence of Vadodara's royal family, Laxmi Vilas was built in full-throttle 19th-century Indo-Saracenic flourish at a cost of Rs 6 million. Built over 500 acres, this is the largest private home built till date and four times the size of Buckingham Palace. <br>&nbsp;</b></p>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" style="width: 18rem; background-color: rgb(197, 245, 255); border-radius: 1em; opacity: 70%;">
+                            <img src="{{ url_for('static', filename='/images/Sursagar-Lake-Thumbnail.jpg') }}" class="card-img-top" style="height: 25vh; object-fit: fill;" alt="Sursagar Lake">
+                            <div class="card-body">
+                              <p class="card-text"><b>This lake is situated in the middle of the city of Vadodara. Originally it was a little pond called 'Chandan Talav ' , which was built by Shri Sureshwar Desai, hence named after him as Sursagar. It was renovated and decorated time to time by different rulers of Vadodara.</b></p>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='/js/bootstrap.bundle.min.js') }}"></script>
+  </body>
+</html>

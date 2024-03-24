@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vadodara Tourism WebApp By Byte Brigade</title>
+    <link href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='/css/main.css') }}" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.0/html2pdf.bundle.min.js"></script>
+
+        <!-- Font Awesome -->
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+rel="stylesheet"
+/>
+
+  </head>
+  <body>
+
+    {% include 'navbar.html' %}
+    <br>
+    <div class="container">
+        <center>
+            <p class="h1">Get Started by Planning Your Visit</p>
+            <div>Total Spend: <span id="total-spend">₹0</span></div>
+        </center>
+        <br>
+        <div class="row">
+            <div><center><button id="print-schedule-btn" class="btn btn-primary">Print Schedule</button></center></div><br><br>
+            <div class="col">
+                <table class="table table-striped" id="schedule-table">
+                    <thead>
+                        <tr>
+                            <th><center>Sr. No.</center></th>
+                            <th><center>Place To Visit (With Estimated Time)</center></th>
+                            <th><center>Maximum Spends (in &#8377;)</center></th>
+                            <th><center>Delete Place</center></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-auto">
+                <form>
+                    <select class="form-select">
+                        <option value="Laxmi Vilas Palace - (1-2hrs)">Laxmi Vilas Palace - (1-2hrs)</option>
+                        <option value="Sayaji Garden - (1-2hrs)">Sayaji Garden - (1-2hrs)</option>
+                        <option value="Baroda Museum And Picture Gallery - (1-2hrs)">Baroda Museum And Picture Gallery - (1-2hrs)</option>
+                        <option value="Ajwa Nimeta Dam Garden - (1-2hrs)">Ajwa Nimeta Dam Garden - (1-2hrs)</option>
+                        <option value="Maharaja Fateh Singh Museum - (1-2hrs)">Maharaja Fateh Singh Museum - (1-2hrs)</option>
+                        <option value="Sur Sagar Lake - (1hr)">Sur Sagar Lake - (1hr)</option>
+                        <option value="Kirti Mandir - (1hr)">Kirti Mandir - (1hr)</option>
+                        <option value="Baps Shri Swaminarayan Mandir - (1-2hrs)">Baps Shri Swaminarayan Mandir - (1-2hrs)</option>
+                        <option value="Sardar Patel Planetarium - (1-2hrs)">Sardar Patel Planetarium - (1-2hrs)</option>
+                        <option value="Kabirvad - (1hr)">Kabirvad - (1hr)</option>
+                        <option value="Mandvi Gate - (1hr)">Mandvi Gate - (1hr)</option>
+                        <option value="Gaekwad Baroda Golf Club - (2-3hrs)">Gaekwad Baroda Golf Club - (2-3hrs)</option>
+                        <option value="S Cube Waterpark - (2-3hrs)">S Cube Waterpark - (2-3hrs)</option>
+                        <option value="Jambughoda Wildlife Sanctuary - (2-3hrs)">Jambughoda Wildlife Sanctuary - (2-3hrs)</option>
+                        <option value="Hazira Maqbara - (1hr)">Hazira Maqbara - (1hr)</option>
+                        <option value="Nyay Mandir - (1hr)">Nyay Mandir - (1hr)</option>
+                        <option value="Ajwa Water Park - (2-3hrs)">Ajwa Water Park - (2-3hrs)</option>
+                        <option value="Narmada Canal - (1-2hrs)">Narmada Canal - (1-2hrs)</option>
+                        <option value="Shri Aurobindo Ashram - (2-3hrs)">Shri Aurobindo Ashram - (2-3hrs)</option>
+                      </select>
+                      <br>
+                      <button class="btn btn-danger">Add To Schedule</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    {% include 'footer.html' %}
+    
+    <script>
+        $(document).ready(function() {
+    
+            $('#print-schedule-btn').click(function() {
+                var element = document.getElementById('schedule-table');
+                html2pdf(element);
+            });
+    
+            var tableData = localStorage.getItem('tableData');
+            if (tableData) {
+                $('table.table-striped tbody').html(tableData);
+                updateTotal();
+            }
+            
+            $('form').submit(function(e) {
+                e.preventDefault();
+                
+                var selectedOption = $('select.form-select').val();
+                var selectedText = $('select.form-select option:selected').text();
+                
+                // Define fixed prices for each option
+                var prices = {
+                    "Laxmi Vilas Palace - (1-2hrs)": 200,
+                    "Sayaji Garden - (1-2hrs)": 150,
+                    "Baroda Museum And Picture Gallery - (1-2hrs)": 180,
+                    "Ajwa Nimeta Dam Garden - (1-2hrs)": 160,
+                    "Maharaja Fateh Singh Museum - (1-2hrs)": 170,
+                    "Sur Sagar Lake - (1hr)": 100,
+                    "Kirti Mandir - (1hr)": 120,
+                    "Baps Shri Swaminarayan Mandir - (1-2hrs)": 190,
+                    "Sardar Patel Planetarium - (1-2hrs)": 180,
+                    "Kabirvad - (1hr)": 110,
+                    "Mandvi Gate - (1hr)": 130,
+                    "Gaekwad Baroda Golf Club - (2-3hrs)": 250,
+                    "S Cube Waterpark - (2-3hrs)": 280,
+                    "Jambughoda Wildlife Sanctuary - (2-3hrs)": 300,
+                    "Hazira Maqbara - (1hr)": 140,
+                    "Nyay Mandir - (1hr)": 150,
+                    "Ajwa Water Park - (2-3hrs)": 270,
+                    "Narmada Canal - (1-2hrs)": 170,
+                    "Shri Aurobindo Ashram - (2-3hrs)": 220
+                };
+                
+                // Get the price based on the selected option
+                var price = prices[selectedText];
+                
+                $('table.table-striped tbody').append('<tr><td><center>' + ($('table.table-striped tbody tr').length + 1) + '</center></td><td><center>' + selectedText + '</center></td><td><center>₹' + price + '</center></td><td><center><button class="btn btn-danger delete-btn">Delete</button></center></td></tr>');
+                
+                $('select.form-select option:selected').remove();
+                
+                updateTotal();
+                
+                localStorage.setItem('tableData', $('table.table-striped tbody').html());
+            });
+            
+    
+            $('table').on('click', '.delete-btn', function() {
+                var row = $(this).closest('tr');
+                var rowData = row.find('td:eq(1)').text();
+                var spend = parseInt(row.find('td:eq(2)').text().replace('₹', ''));
+                $('select.form-select').append('<option value="' + rowData + '">' + rowData + '</option>');
+                row.remove();
+                
+                updateTotal();
+                
+                localStorage.setItem('tableData', $('table.table-striped tbody').html());
+            });
+            
+            function updateTotal() {
+                var total = 0;
+                $('table.table-striped tbody tr').each(function() {
+                    var spend = parseInt($(this).find('td:eq(2)').text().replace('₹', ''));
+                    total += spend;
+                });
+                $('#total-spend').text('₹' + total);
+            }
+        });
+    </script>
+    
+
+    <script src="{{ url_for('static', filename='/js/bootstrap.bundle.min.js') }}"></script>
+  </body>
+</html>

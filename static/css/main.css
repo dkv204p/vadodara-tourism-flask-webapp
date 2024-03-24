@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Quicksand');
+
+*{
+    font-family: 'quicksand',Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+.img-features {
+    height: 40vh;
+}
+
+.carousel-item img {
+    height: 80vh;
+    width: 100%; 
+    object-fit: cover; 
+}
+
+.bg-img {
+    position: relative;
+}
+
+.bg-img:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/static/images/Gujarat-Tourism-Thumbnail.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    background-color: rgba(0, 0, 0, 0.4); /* Adjust the opacity by changing the last value (0.5 for 50% opacity) */
+    background-blend-mode: overlay; /* Blend the background image with the background color */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.container-1 {
+    position: relative;
+    z-index: 1;
+    padding: 50px 0; /* Adjust padding as needed */
+}
+
+.circle {
+    width: 100px; /* Adjust the size of the circle as needed */
+    height: 100px; /* Adjust the size of the circle as needed */
+    border-radius: 50%; /* Makes it a circle */
+    overflow: hidden; /* Clips the image to the circle */
+    margin: 0 auto; /* Centers the circle horizontally */
+  }
+
+  .circle img {
+    width: 100%; /* Makes the image fill the circle */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Ensures no extra space is taken */
+  }
